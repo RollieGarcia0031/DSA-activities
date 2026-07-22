@@ -1,0 +1,15 @@
+# 1. Ignore everything by default
+*
+
+# 2. Allow directories so Git can scan through them
+!*/
+
+# 3. Allow all C++ source and header files
+!*.cpp
+!*.h
+!*.hpp
+
+# 4. Specifically allow everything inside the bin directory
+!bin/**
+
+!.gitignore
