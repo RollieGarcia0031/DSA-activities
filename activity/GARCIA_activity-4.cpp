@@ -1,92 +1,64 @@
+// declare headers
 #include <iostream>
 
 using namespace std;
 
-double sqrt(double number) {
-    if (number < 0) {
-        return -1.0; // Return error code for negative numbers
-    }
-    
-    if (number == 0 || number == 1) {
-        return number;
-    }
-
-    double guess = number;
-    
-    double tolerance = 0.0000001;
-    
-    while (true) {
-        double nextGuess = 0.5 * (guess + number / guess);
-        
-        double difference = nextGuess - guess;
-        if (difference < 0) {
-            difference = -difference;
-        }
-        
-        guess = nextGuess;
-        
-        if (difference < tolerance) {
-            break;
-        }
-    }
-
-    return guess;
-}
-
-double pi(){
-    return 3.14;
-}
-
-double square(const double value){
-    return value * value;
-}
-
-double get_circleCircumference(double radius, double pi){
-    double circumference = 2 * pi * radius;
-
-    return circumference;
-}
-
-double get_circleArea(double radius, double pi){
-    double area = pi * square(radius);
-
-    return area;
-}
-
-double get_ellipseArea(double radius, const double pi){
-    double a = radius;
-    double b = 2 * radius;
-
-    double area = pi * a * b;
-
-    return area;
-}
-
-double get_ellipseCircumference(double radius, const double pi) {
-    const double a = radius;
-    const double b = 2.0 * radius;
-
-    double circumference = pi * (
-        (3 * (a + b))
-        - sqrt((3*a + b) * (a + 3*b))
-    );
-
-    return circumference;
-}
+// declare helper functions
+void assignPi(double *pi, const double value);
+void evaluate_circle(double radius, double pi, double &circumference, double &area);
+void evaluate_ellipse(double radius, double pi, double &circumference, double &area);
 
 int main(){
 
-    double radius;
+    // declare the value of PI
+    double PI;
+    assignPi(&PI, 3.1415);
 
-    cout << "Enter radius: ";
+    // take user input, radius
+    double radius;
+    
+    cout << "----------\nEnter radius: ";
     cin >> radius;
 
-    cout << "Circle area: " << get_circleArea(radius, pi()) << endl;
-    cout << "Circle circumference: " << get_circleCircumference(radius, pi()) << endl;
+    double circleCircumference, circleArea;
+    double ellipseCircumference, ellipseArea;
 
-    cout << "Ellipse area: " << get_ellipseArea(radius, pi()) << endl;
-    cout << "Ellipse circumference: " << get_ellipseCircumference(radius, pi()) << endl;
+    // calculate circumference of circle and ellipse
+    // pass the address of area and circumference, manipulate, then display the values
+    evaluate_circle(radius, PI, circleCircumference, circleArea);
+    evaluate_ellipse(radius, PI, ellipseCircumference, ellipseArea);
 
+    cout << "\n\n---------\nCIRCLE\n---------\n";
+    cout << "Circumference: " << circleCircumference << endl;
+    cout << "Area: " << circleArea << endl;
+
+    cout << "\n\n---------\nEllipse\n---------\n";
+    cout << "Circumference: " << ellipseCircumference << endl;
+    cout << "Area: " << ellipseArea << endl;
 
     return 0;
+}
+
+
+// assign the desired value of PI
+void assignPi(double *pi, const double value ){
+    *pi = value;
+}
+
+// calculate the area and circumference of circle
+void evaluate_circle(double radius, double pi, double &circumference, double &area){
+    area = pi * radius * radius;
+    circumference = 2 * pi * radius;
+}
+
+// calculate the circumference and area of ellipse
+void evaluate_ellipse(double radius, double pi, double &circumference, double &area){
+    double A = radius;
+    double B = radius * 2;
+
+    area = pi * A * B;
+
+    // use approximation formula
+    double eccentricFactor = (A - B) / (A + B);
+    circumference = pi * (A + B) * (1 + (eccentricFactor * eccentricFactor) / 4);
 }
