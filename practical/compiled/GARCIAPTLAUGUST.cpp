@@ -1,5 +1,4 @@
 #include <iostream>
-#include <ostream>
 
 using namespace std;
 
@@ -19,7 +18,7 @@ int main(){
     switch (option){
 
         // SET A problem:
-        case 1 : {
+        case 1 :                                                                                {
 
             // declare input and their pointers
             double input1, input2;
@@ -49,7 +48,7 @@ int main(){
 
                  << endl;
             break;
-        }
+                                                                                                                           }
 
         // SET B problem:
         case 2: {
