@@ -5,12 +5,15 @@ using namespace std;
 int getNumber();
 char getCharEquivalent(int);
 
+void print2DCharArray(char table[50][50], int, int);
+void print2DIntArray(int table[50][50], int , int);
+
 int main(){
 
     // initialize 2D array with limit of 50x50
     int rows, cols, num_input;
-    int table[50][50];
-    char table2[50][50];
+    int int_table[50][50];
+    char char_table[50][50];
 
     cout << "----Enter array dimensions----" << endl;
     // get input values for rows and columns
@@ -26,46 +29,22 @@ int main(){
         for(int x = 0; x < cols; x ++){
             cout << "Enter number (1-26)(Row " << y+1 << ", Column " << x+1 << "): ";
             num_input = getNumber();
-            table[y][x] = num_input;
-            table2[y][x] = getCharEquivalent(num_input);
+            int_table[y][x] = num_input;
+
+            int mirrored_y = (rows/2)-y-1;
+            char_table[mirrored_y][x] = getCharEquivalent(num_input);
         }
     }
-
-    // fill the lower half with equivalent lower-case number
-    for (int y = (rows/2); y < rows; y ++){
-        for (int x = 0; x < cols; x ++){
-            table[y][x] = table[y- (rows/2)][x] + 26;
-        }
-    }
-
-    cout << endl << "- - - Letter table - - - " << endl;
-
-    // fill up the lower half of table with equivalent lower-case letter
-    for (int y = (rows/2); y < rows; y ++){
-        for (int x = 0; x < cols; x ++){
-            table2[y][x] = getCharEquivalent(table[y- (rows/2)][x] + 26);
-        }
-    }
-
-    // print the array containing letters 
-    for (int y = 0; y < rows; y ++){
-        cout << " ";
-        for(int x = 0; x < cols; x ++){
-            cout << table2[y][x] << ",\t";
-        }
-        cout << endl;
-    }
-
 
     // find the index of the smallest number in the 2D array
     // using linear search
     int min_row_index = 0;
     int min_col_index = 0;
 
-    for (int y = 0; y < rows; y ++){
+    for (int y = 0; y < rows/2; y ++){
         for(int x = 0; x < cols; x ++){
-            int smallest = table[min_row_index][min_col_index];
-            int currentElement = table[y][x];
+            int smallest = int_table[min_row_index][min_col_index];
+            int currentElement = int_table[y][x];
             if(smallest > currentElement){
                 min_row_index = y;
                 min_col_index = x;
@@ -73,13 +52,44 @@ int main(){
         }
     }
 
+    // print the table containing letters and number
+    print2DIntArray(int_table, rows/2, cols);
+    cout << "------------------------------" << endl; 
+    print2DCharArray(char_table, rows/2, cols);
+
+
     // display the smallest number found in the 2D array
-    int smallestNumber = table[min_row_index][min_col_index];
+    int smallestNumber = int_table[min_row_index][min_col_index];
     cout << endl << "Smallest: " << smallestNumber << endl;
     cout << "Found at index: [" << min_row_index << "]" << "[" << min_col_index << "]" << endl;
     cout << "Equivalent alphabet character: " << getCharEquivalent(smallestNumber) << endl;
     return 0;
 }
+
+void print2DIntArray(int table[50][50], int rows, int cols){
+
+    // print the array containing letters 
+    for (int y = 0; y < rows; y ++){
+        cout << " ";
+        for(int x = 0; x < cols; x ++){
+            cout << table[y][x] << ",\t";
+        }
+        cout << endl;
+    }
+}
+
+void print2DCharArray(char table[50][50], int rows, int cols){
+
+    // print the array containing letters 
+    for (int y = 0; y < rows; y ++){
+        cout << " ";
+        for(int x = 0; x < cols; x ++){
+            cout << table[y][x] << ",\t";
+        }
+        cout << endl;
+    }
+}
+
 
 // get input number ranging from 1-26 only
 int getNumber(){
@@ -315,7 +325,6 @@ char getCharEquivalent(int num){
         case 52:
             return 'z';
             break;
-
     }
 
     return ' ';
