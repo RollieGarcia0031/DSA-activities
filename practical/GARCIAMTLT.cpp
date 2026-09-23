@@ -4,18 +4,98 @@ using namespace std;
 
 int getNumber();
 char getCharEquivalent(int);
-
 void print2DCharArray(char table[50][50], int, int);
 void print2DIntArray(int table[50][50], int , int);
+int setA();
+int setB();
 
 int main(){
+    // take user input for problem set
+
+    int input_option;
+    cout << "Insert option for problem set: (1,2) ";
+    cin >> input_option;
+
+    cout << endl << endl;
+    switch(input_option){
+        case 1:
+            setA();
+            break;
+        case 2:
+            setB();
+            break;
+        default:
+            cout << " Invalid Option! " << endl << endl;
+    }
+}
+
+int setA(){
+    cout << " - - - - - - SET A - - - - - - " << endl;
+
+    int rows, cols;
+    int int_table[50][50];
+    char char_table[50][50];
+
+    // get the row input
+    cout << endl <<  "Insert the number of rows: ";
+    cin >> rows;
+    cols = rows;
+
+    // insert value to each element of array
+    for (int y = 0; y < rows; y++){
+        for (int x = 0; x < cols; x++){
+            cout << "Insert a number between 1-26:";
+            int input = getNumber();
+            int_table[y][x] = input;
+            char_table[y][x] = getCharEquivalent(input);
+        }
+    }
+
+    // print the number and letter array:
+    cout << endl << "Number Array" << endl;
+    print2DIntArray(int_table, rows, cols);
+
+    cout << "Letter Array" << endl;
+    print2DCharArray(char_table, rows, cols);
+
+    // ask user for target character:
+    char targetChar;
+    cout << endl << "Insert the character to be searched in table: ";
+    cin >> targetChar;
+
+    // find the target character using linear search
+    int found_index_row = 0;
+    int found_index_col = 0;
+    bool element_found = false;
+    for (int y = 0; y < rows; y++){
+        for (int x = 0; x < cols; x++){
+            char element = char_table[y][x];
+            if (element == targetChar){
+                found_index_row = y;
+                found_index_col = x;
+                element_found = true;
+            }
+        }
+    }
+
+    if (element_found){
+        cout << "Found at index: (" << found_index_row << ", " << found_index_col << ")" << endl;
+    } else {
+        cout << "Element '" << targetChar << "' not found!" << endl;
+    }
+
+    return 0;
+}
+
+int setB(){
+    cout << " - - - - - - SET B - - - - - - " << endl;
 
     // initialize 2D array with limit of 50x50
     int rows, cols, num_input;
     int int_table[50][50];
     char char_table[50][50];
 
-    cout << "----Enter array dimensions----" << endl;
+    cout << endl << "----Enter array dimensions----" << endl;
     // get input values for rows and columns
     cout << "Enter the number of rows: ";
     cin >> rows;
@@ -53,8 +133,9 @@ int main(){
     }
 
     // print the table containing letters and number
+    cout << endl << "Array Values" << endl;
     print2DIntArray(int_table, rows/2, cols);
-    cout << "------------------------------" << endl; 
+    cout << "---------------------" << endl; 
     print2DCharArray(char_table, rows/2, cols);
 
 
@@ -67,7 +148,6 @@ int main(){
 }
 
 void print2DIntArray(int table[50][50], int rows, int cols){
-
     // print the array containing letters 
     for (int y = 0; y < rows; y ++){
         cout << " ";
@@ -111,221 +191,17 @@ int getNumber(){
 }
 
 // retrieve a char based on a given number
-// it returns capital letters A-Z for 1-26
-// and return small letters a-z for 27-52
+// it returns capital letters a-z for 1-26
 char getCharEquivalent(int num){
-    switch (num){
+    char letters[] = {
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+        'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+        't', 'u', 'v', 'w', 'x', 'y', 'z'
+    };
 
-        case 1:
-            return 'A';
-            break;
-
-        case 2:
-            return 'B';
-            break;
-
-        case 3:
-            return 'C';
-            break;
-
-        case 4:
-            return 'D';
-            break;
-
-        case 5:
-            return 'E';
-            break;
-
-        case 6:
-            return 'E';
-            break;
-
-        case 7:
-            return 'G';
-            break;
-
-        case 8:
-            return 'H';
-            break;
-
-        case 9:
-            return 'I';
-            break;
-
-        case 10:
-            return 'J';
-            break;
-
-        case 11:
-            return 'K';
-            break;
-
-        case 12:
-            return 'L';
-            break;
-
-        case 13:
-            return 'M';
-            break;
-
-        case 14:
-            return 'N';
-            break;
-
-        case 15:
-            return 'O';
-            break;
-
-        case 16:
-            return 'P';
-            break;
-
-        case 17:
-            return 'Q';
-            break;
-
-        case 18:
-            return 'R';
-            break;
-
-        case 19:
-            return 'S';
-            break;
-
-        case 20:
-            return 'T';
-            break;
-
-        case 21:
-            return 'U';
-            break;
-
-        case 22:
-            return 'V';
-            break;
-
-        case 23:
-            return 'W';
-            break;
-
-        case 24:
-            return 'X';
-            break;
-
-        case 25:
-            return 'Y';
-            break;
-
-        case 26:
-            return 'Z';
-            break;
-
-
-        // lower case letters
-        case 27:
-            return 'a';
-            break;
-
-        case 28:
-            return 'b';
-            break;
-
-        case 29:
-            return 'c';
-            break;
-
-        case 30:
-            return 'd';
-            break;
-
-        case 31:
-            return 'e';
-            break;
-
-        case 32:
-            return 'f';
-            break;
-
-        case 33:
-            return 'g';
-            break;
-
-        case 34:
-            return 'h';
-            break;
-
-        case 35:
-            return 'i';
-            break;
-
-        case 36:
-            return 'j';
-            break;
-
-        case 37:
-            return 'k';
-            break;
-
-        case 38:
-            return 'l';
-            break;
-
-        case 39:
-            return 'm';
-            break;
-
-        case 40:
-            return 'n';
-            break;
-
-        case 41:
-            return 'o';
-            break;
-
-        case 42:
-            return 'P';
-            break;
-
-        case 43:
-            return 'q';
-            break;
-
-        case 44:
-            return 'r';
-            break;
-
-        case 45:
-            return 's';
-            break;
-
-        case 46:
-            return 't';
-            break;
-
-        case 47:
-            return 'u';
-            break;
-
-        case 48:
-            return 'v';
-            break;
-
-        case 49:
-            return 'w';
-            break;
-
-        case 50:
-            return 'x';
-            break;
-
-        case 51:
-            return 'y';
-            break;
-
-        case 52:
-            return 'z';
-            break;
-    }
+    if(num <= 26 && num > 0)
+        return letters[num-1];
 
     return ' ';
 }
+
