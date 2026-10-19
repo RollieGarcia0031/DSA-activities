@@ -1,66 +1,61 @@
 #include <iostream>
 
-void bubbleSort(int[], int);
+using namespace std;
+
+void bubbleSort(int[], int, bool);
 int getThreeDigitNumber();
-void print2dArray(int array[100][100], int, int);
-int* convert_2D_to_1D_array(int array[100][100], int rows, int cols);
+void print_1D_array_as_2D(int table[100], int rows, int cols);
 
 void setA();
-
-using namespace std;
+void setB();
 
 int main(){
 
-    setA();
+    setB();
     return 0;
+}
+
+void setB(){
+    int rows, cols;
+    int table[100];
+
+    cout << "Insert rows: ";
+    cin >> rows;
+    cout << "Insert cols: ";
+    cin >> cols;
+
+
+    for (int i = 0; i < rows * cols; i ++){
+        cout << "Insert a 3-digit number";
+        int input = getThreeDigitNumber();
+        table[i] = input;
+    }
+
+    bubbleSort(table, rows*cols, false);
+    
+    cout << endl << "Table in descending order: " << endl;
+    print_1D_array_as_2D(table, rows,  cols);
 }
 
 void setA(){
     int rows;
-    int table[100][100];
+    int table[100];
 
     cout << "Insert number of rows: ";
     cin >> rows;
 
-    for (int y = 0; y < rows; y ++){
-        for (int x = 0; x < rows; x ++){
-            cout << "Insert three-digit integer: ";
-            int input = getThreeDigitNumber();
-            table[y][x] = input;
-        }
+    for (int i = 0; i < rows*rows; i ++){
+        cout << "Insert a 3 digit integer: ";
+        int input = getThreeDigitNumber();
+        table[i] = input;
     }
 
-    cout << "Printing 2d array" << endl;
-    int 1Darray[] = convert_2D_to_1D_array(table,rows ,rows);
-
-    print2dArray(table, rows, rows);
+    bubbleSort(table, rows*rows, true);
+    cout << endl << "Sorted as Table: " << endl;
+    print_1D_array_as_2D(table,rows, rows);
 }
 
-int* convert_2D_to_1D_array(int array[100][100], int rows, int cols){
-    int array1D[1000];
-    int *arrayPtr = array1D;
-
-    int main_index = 0;
-    for (int y = 0; y < rows; y ++){
-        for(int x = 0; x < cols && main_index < (rows * cols); x ++){
-            array1D[main_index] = array[y][x];
-            main_index ++;
-        }
-    }
-
-    return arrayPtr;
-}
-
-void print2dArray(int array[100][100], int rows, int cols ){
-    for (int y = 0; y < rows; y ++){
-        for (int x = 0; x < cols; x ++){
-            cout << array[y][x] << "\t";
-        }
-        cout << endl;
-    }
-}
-
-void bubbleSort(int arr[], int size){
+void bubbleSort(int arr[], int size, bool ascending){
     
     // iterate by using a moving starting index
     for (int startingIndex = 0; startingIndex < size-1; startingIndex ++){
@@ -71,12 +66,13 @@ void bubbleSort(int arr[], int size){
             int nextElement = arr[currentIndex + 1];
 
             // check if next element is smaller than current element
-            if(currentElem > nextElement){
+            if((ascending && currentElem > nextElement) || (!ascending && currentElem < nextElement) ){
                 // swap the current element to next element
                 int temp = arr[currentIndex];
                 arr[currentIndex] = arr[currentIndex+1];
                 arr[currentIndex+1] = temp;
             }
+            
         }
     }
 }
@@ -101,3 +97,14 @@ int getThreeDigitNumber(){
 
     return 0;
 }
+
+void print_1D_array_as_2D(int table[100], int rows, int cols){
+    for (int y = 0; y < rows; y ++){
+        for (int x = 0; x < cols; x ++){
+            int num = table[x + (rows * y)];
+            cout << num << "\t";
+        }
+        cout << endl;
+    }
+}
+
