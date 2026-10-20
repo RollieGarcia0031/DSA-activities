@@ -11,7 +11,21 @@ void setB();
 
 int main(){
 
-    setB();
+    int option;
+    cout << "Switch problem set: (1,2): " << endl;
+    cin >> option;
+
+    switch (option){
+        case 1:
+            setA();
+            break;
+        case 2:
+            setB();
+            break;
+        default:
+            cout << "invalid option" << endl;
+    }
+
     return 0;
 }
 
