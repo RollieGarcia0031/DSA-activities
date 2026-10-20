@@ -115,7 +115,7 @@ int getThreeDigitNumber(){
 void print_1D_array_as_2D(int table[100], int rows, int cols){
     for (int y = 0; y < rows; y ++){
         for (int x = 0; x < cols; x ++){
-            int num = table[x + (rows * y)];
+            int num = table[x + (cols * y)];
             cout << num << "\t";
         }
         cout << endl;
