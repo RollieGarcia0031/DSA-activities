@@ -6,12 +6,14 @@ int main(){
 
     int num1, num2;
 
+    // insert user input
     cout << "Insert your first number: ";
     cin >> num1;
     
     cout << "Insert your second number: ";
     cin >> num2;
 
+    // display outputs
     cout << endl;
     cout << "sum: ";
     cout << num1 << " + " << num2 << " = ";
