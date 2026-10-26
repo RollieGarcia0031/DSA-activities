@@ -1,5 +1,4 @@
 #include <iostream>
-#include <ostream>
 
 using namespace std;
 
@@ -8,6 +7,7 @@ void enqueue(int [3][3], int &, int, const int, const int);
 void dequeue(int table[3][3], int &size, const int cols);
 void push(int table[3][3], int &size, int value, const int rows, const int cols);
 void pop(int table[3][3], int &size, const int cols);
+int getThreeDigitNumber();
 
 int main(){
     int table[3][3] = {
@@ -44,7 +44,7 @@ int main(){
         // ask for number input for option 1 & 3
         if (option == 1 || option == 3){
             cout << "\nInsert a 3 digit number: ";
-            cin >> inputNumber;
+            inputNumber = getThreeDigitNumber();
         }
 
         switch (option) {
@@ -84,7 +84,7 @@ void enqueue(int table[3][3], int &size, int value, const int rows, const int co
     size++;
 }
 
-void dequeue(int table[3][3], int &size, const int cols) {
+void pop(int table[3][3], int &size, const int cols) {
     if (size == 0){
         cout << "Queue is empty, cannot dequeue" << endl;
         return;
@@ -108,7 +108,7 @@ void push(int table[3][3], int &size, int value, const int rows, const int cols)
     size++;
 }
 
-void pop(int table[3][3], int &size, const int cols){
+void dequeue(int table[3][3], int &size, const int cols){
     if (size == 0){
         cout << "Stack is empty, cannot pop" << endl;
         return;
@@ -126,3 +126,25 @@ void printTable(int table[3][3]){
         cout << endl;
     }
 }
+
+int getThreeDigitNumber(){
+    int input;
+    int running = true;
+
+    while(running){
+        cin >> input;
+
+        bool hasMoreThan2Digit = (input > 0 && input > 99) || (input < 0 && input < -99);
+        bool hasLessThan4Digit = (input > 0 && input < 1000) || (input < 0 && input > -1000); 
+
+        if (hasMoreThan2Digit && hasLessThan4Digit){
+            running = false;
+            return input;
+        } else {
+            cout << "use three digit number only!:  "; 
+        }
+    }
+
+    return 0;
+}
+
