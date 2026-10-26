@@ -204,4 +204,3 @@ char getCharEquivalent(int num){
 
     return ' ';
 }
-
