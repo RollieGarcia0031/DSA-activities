@@ -3,16 +3,17 @@
 using namespace std;
 
 // Prelim Terms
-void activity_1();
-void activity_2();
-void activity_3();
-void activity_4();
-void practical_1();
-void practical_2();
-void exam_1 ();
+void activity_1(); //  1.
+void activity_2(); //  2.
+void activity_3(); //  3.
+void activity_4(); //  4.
+void practical_1(); // 5.
+void practical_2(); // 6.
+void exam_1 ();     // 7.
 
 // Midterms
-void activity_5();
+void activity_5(); // 8.
+void activity_6(); // 9.
 
 // Final Term
 // -----------
@@ -50,9 +51,12 @@ int main(){
             break;
         case 2:
             cout << "\n\nInsert Number Option:" << endl
-                 << " 7. Activity 5"    << endl
+                 << " 8. Activity 5"    << endl
+                 << " 9. Activity 6"    << endl
                  << " (Input Number): " 
             ;
+
+            cin >> itemOption;
             break;
         case 3:
             break;
@@ -83,6 +87,12 @@ int main(){
             break;
         case 7:
             exam_1();
+            break;
+        case 8:
+            activity_5();
+            break;
+        case 9:
+            activity_6();
             break;
         default:
             cout << "Invalid Option";
@@ -594,7 +604,6 @@ void exam_1 (){
 }
 
 int getThreeDigitNumber();
-
 void activity_5(){
 
     // declare the 4x4 table
@@ -638,6 +647,82 @@ void activity_5(){
 
     // print the max number
     cout << endl << "Max number: " << max << endl;
+}
+
+void activity_6(){
+    // declare the table and its size
+    int maxRows = 4;
+    int maxCols = 4;
+    
+    int targetNumber;
+
+    int table[4][4] = {
+        {123,124,125,126},
+        {234,235,236,237},
+        {342,343,346,349},
+        {451,459,460,470},
+    };
+
+    // print the table's contents
+    cout << endl << endl << "- - - - - - TABLE- - - - - -" << endl;
+    for (int rowIndex = 0; rowIndex < maxRows; rowIndex ++){
+        cout << " ";
+        for (int colIndex = 0; colIndex < maxCols; colIndex ++){
+            cout << table[rowIndex][colIndex] << "\t";
+        }
+        cout << endl;
+    }
+
+    // ask for user input (target number)
+    cout << endl << "Enter the target number: ";
+    cin >> targetNumber;
+
+    // start the search
+    int mid_col_index;
+    bool numberIsFound = false;
+
+    // declare the middle index of array
+    if(maxCols % 2 == 0){
+        mid_col_index = (maxCols / 2) - 1;
+    } else {
+        mid_col_index = maxCols / 2;
+    }
+
+    // run a loop to go through each rows
+    for (int rowIndex = 0; rowIndex < maxRows; rowIndex ++){
+        int midValue = table[rowIndex][mid_col_index];
+
+        // check if the middle value on each row matches the target number
+        if (midValue == targetNumber){
+            cout << "Found at : Row " << rowIndex+1 << ", Column " << mid_col_index+1;
+            numberIsFound = true;
+        } else if (targetNumber > midValue) {
+
+            // search on the right side of columns of target value is greater than the middle value
+            for (int colIndex = mid_col_index; colIndex < maxCols; colIndex ++){
+                if (table[rowIndex][colIndex] == targetNumber){
+                    cout << "Found at : Row " << rowIndex+1 << ", Column " << colIndex+1;
+                    numberIsFound = true;
+                    break;
+                }
+            }
+        } else {
+
+            // search on the left side of column if target value is less than the middle value;
+            for (int colIndex = mid_col_index; colIndex >= 0; colIndex --){
+                if (table[rowIndex][colIndex] == targetNumber){
+                    cout << "Found at : Row " << rowIndex+1 << ", Column " << colIndex+1;
+                    numberIsFound = true;
+                    break;
+                }
+            }
+        }
+    }
+    cout << endl << endl;
+
+    if (!numberIsFound){
+        cout << "Number not found!" << endl;
+    }
 }
 
 // runs a loop that only stop when a 3 digit number
