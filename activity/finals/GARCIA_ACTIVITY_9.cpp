@@ -10,6 +10,7 @@ void pop(int table[3][3], int &size, const int cols);
 int getThreeDigitNumber();
 
 int main(){
+    // declare multidimensional array 
     int table[3][3] = {
         {243, 654, 742},
         {631, 921, 123},
@@ -47,6 +48,7 @@ int main(){
             inputNumber = getThreeDigitNumber();
         }
 
+        // perform selected operation
         switch (option) {
             case 1:
                 enqueue(table, size, inputNumber, rows, cols);
@@ -75,23 +77,41 @@ int main(){
 }
 
 void enqueue(int table[3][3], int &size, int value, const int rows, const int cols){
+    // provide error message if list is full
     if (size >= rows * cols){
         cout << "Queue is full, cannot enqueue " << value << endl;
         return;
     }
 
-    table[size / cols][size % cols] = value;
+    // shift all elements to right
+    for (int i = size - 1; i >= 0; i--){
+        int nextRow = (i + 1) / cols;
+        int nextCol = (i + 1) % cols;
+        int currentRow = i / cols;
+        int currentCol = i % cols;
+
+        table[nextRow][nextCol] = table[currentRow][currentCol];
+    }
+
+    table[0][0] = value;
     size++;
 }
 
 void pop(int table[3][3], int &size, const int cols) {
+    // give error message for empty list
     if (size == 0){
         cout << "Queue is empty, cannot dequeue" << endl;
         return;
     }
 
+    // shift all elements to the left
     for (int i = 0; i < size - 1; i++){
-        table[i / cols][i % cols] = table[(i + 1) / cols][(i + 1) % cols];
+        int currentRow = i / cols;
+        int currencCol = i % cols;
+        int nextRow = (i + 1) / cols;
+        int nextCol = (i + 1) % cols;
+
+        table[currentRow][currencCol] = table[nextRow][nextCol];
     }
 
     size--;
@@ -99,12 +119,22 @@ void pop(int table[3][3], int &size, const int cols) {
 }
 
 void push(int table[3][3], int &size, int value, const int rows, const int cols){
+    // provide error message for full list
     if (size >= rows * cols){
         cout << "Stack is full, cannot push " << value << endl;
         return;
     }
 
-    table[size / cols][size % cols] = value;
+    // shift all elements to the right
+    for (int i = size - 1; i >= 0; i--){
+        int nextRow = (i + 1) / cols;
+        int nextCol = (i + 1) % cols;
+        int currentValue = table[i / cols][i % cols];
+
+        table[nextRow][nextCol] = currentValue;
+    }
+
+    table[0][0] = value;
     size++;
 }
 
@@ -134,8 +164,8 @@ int getThreeDigitNumber(){
     while(running){
         cin >> input;
 
-        bool hasMoreThan2Digit = (input > 0 && input > 99) || (input < 0 && input < -99);
-        bool hasLessThan4Digit = (input > 0 && input < 1000) || (input < 0 && input > -1000); 
+        bool hasMoreThan2Digit = (input > 0 && input > 9) || (input < 0 && input < -9);
+        bool hasLessThan4Digit = (input > 0 && input < 100) || (input < 0 && input > -100); 
 
         if (hasMoreThan2Digit && hasLessThan4Digit){
             running = false;
