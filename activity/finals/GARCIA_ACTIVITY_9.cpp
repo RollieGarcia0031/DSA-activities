@@ -22,13 +22,14 @@ int main(){
 
     int option, inputNumber;
 
-    cout << "Current Table" << endl;
+    cout << "\nCurrent Table" << endl;
     printTable(table);
-    cout << "\n\n";
+    cout << "\n";
 
 
     while (true){
 
+        // take user input for option
         cout << "Insert your option: " << endl
              << " 1. Enqueue " << endl
              << " 2. Dequeue " << endl
@@ -40,10 +41,12 @@ int main(){
 
         cin >> option;
 
+        // ask for number input for option 1 & 3
         if (option == 1 || option == 3){
-            cout << "Insert a 3 digit number: ";
+            cout << "\nInsert a 3 digit number: ";
             cin >> inputNumber;
         }
+
         switch (option) {
             case 1:
                 enqueue(table, size, inputNumber, rows, cols);
@@ -64,8 +67,9 @@ int main(){
                 cout << "invalid input!";
         }
 
-        cout << "\n------------------- Result Table -------------------\n";
+        cout << "\n ------------------- Result Table -------------------\n";
         printTable(table);
+        cout << "------------------- Result Table -------------------\n\n";
     }
     return 0;
 }
@@ -117,7 +121,7 @@ void pop(int table[3][3], int &size, const int cols){
 void printTable(int table[3][3]){
     for (int y = 0; y < 3; y ++){
         for (int x = 0; x < 3; x ++){
-            cout << table[y][x] << "\t";
+            cout << " " << table[y][x] << "\t";
         }
         cout << endl;
     }
