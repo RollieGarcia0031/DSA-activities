@@ -8,10 +8,11 @@ void activity_2();
 void activity_3();
 void activity_4();
 void practical_1();
+void practical_2();
 void exam_1 ();
 
 // Midterms
-// ----------
+void activity_5();
 
 // Final Term
 // -----------
@@ -40,13 +41,18 @@ int main(){
                  << " 3. Activity 3"    << endl
                  << " 4. Activity 4"    << endl
                  << " 5. Practical Test 1" << endl
-                 << " 6. Exam 1" << endl
+                 << " 6. Practical Test 2" << endl
+                 << " 7. Exam 1" << endl
                  << " (Input Number): " 
             ;
             cin >> itemOption;
 
             break;
         case 2:
+            cout << "\n\nInsert Number Option:" << endl
+                 << " 7. Activity 5"    << endl
+                 << " (Input Number): " 
+            ;
             break;
         case 3:
             break;
@@ -73,6 +79,9 @@ int main(){
             practical_1();
             break;
         case 6:
+            practical_2();
+            break;
+        case 7:
             exam_1();
             break;
         default:
@@ -210,11 +219,139 @@ void activity_4(){
     cout << "Area: " << ellipseArea << endl;
 }
 
+void practical_1(){
+
+    int set_int;
+
+    cout << "Choose set (1-3): ";
+    cin >> set_int;
+
+    switch(set_int){
+
+        // leap year
+        case 1:
+            // declare and get user input
+            int year, month;
+
+            cout << "Enter year: ";
+            cin >> year;
+
+            cout << "Enter month(1-12): ";
+            cin >> month;
+
+            // check different month cases
+            switch (month) {
+                case 2:
+                    if ((year % 400 != 0) && (year % 4 == 0 && year % 400 != 0) ) {
+                    cout << "this month has 29 days" << endl;
+                    } else {
+                        cout << "this month has 28 days" << endl;
+                    }
+                break;
+
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    cout << "this month has 31 days " << endl;
+                break;
+
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    cout << "this has 30 days" << endl;
+                break;
+
+                default:
+                    cout << "invalid month";
+            }
+        break;
+
+        // hour glass
+        case 2:
+
+            int row_size;
+            cout << "Enter rows: ";
+            cin >> row_size;
+
+            // print upper half
+            for (int row = row_size; row > 0; row --){
+                // calculate left margin
+                int left_margin = row_size - row;
+                for (int i = 0; i < left_margin; i++){
+                    cout << "  ";
+                }
+
+                // print needed chars
+                for (int i = 0; i < row; i ++){
+                    cout << "@   ";
+                }
+
+                cout << endl;
+            }
+
+            // print lower half
+            for(int row = 2; row <= row_size; row ++){
+                int left_margin = row_size - row;
+
+                for (int i = 0; i < left_margin; i++){
+                    cout << "  ";
+                }
+
+                for (int i = 0; i < row; i ++){
+                    cout << "@   ";
+                }
+
+                cout << endl;
+            }
+                
+        break;
+
+        // days parser
+
+        case 3:
+            // get user inputs
+            int seconds_input;
+
+            // convert 16:45:00 to seconds
+            int additional_seconds = 60300;
+            
+            cout << "Enter the amount of seconds: ";
+            cin >> seconds_input;
+            int additional_input = seconds_input + additional_seconds;
+
+            // use loop to print original and added time
+            for (int i = 1; i <= 2; i ++){
+                // print days
+                cout << (seconds_input / 86400) << " : ";
+                seconds_input %= 86400;
+
+                // print hours
+                cout << (seconds_input / 3600) << " : ";
+                seconds_input %= 3600;
+
+                // print minuts
+                cout << (seconds_input / 60) << " : ";
+                seconds_input %= 60;
+
+                // print seconds
+                cout << (seconds_input) << endl;
+
+                seconds_input = additional_input;
+            }
+        break;
+    }
+}
+
 double getSum(double num1, double num2, double ref1, double ref2);
 double getAverage(double num1, double num2, double ref1, double ref2);
 double getProduct(double num1, double num2, double ref1, double ref2);
 
-void practical_1(){
+void practical_2(){
 
     // choose option 1 or 2
     int option;
@@ -454,6 +591,76 @@ void exam_1 (){
             break;
                                                                                                                                                                                                                     }
     }
+}
+
+int getThreeDigitNumber();
+
+void activity_5(){
+
+    // declare the 4x4 table
+    int rows = 4;
+    int cols = 4;
+    int table[4][4];
+
+    // input 3 digit number on each cell of table
+    cout << endl << endl << " ------------- Enter a three digit number ------------- " << endl;
+    for (int row = 0; row < rows; row++){
+
+        for (int col = 0; col < cols; col++){
+
+            cout << "Row " << row+1 << ", Column " << col+1 << " : ";
+
+            int inputNumber = getThreeDigitNumber();
+            table[row][col] = inputNumber;
+        }
+    }
+
+    // assume the first element as the max
+    int max = table[0][0];
+
+    // compare each element and print to find the max
+    cout << endl << endl << " ------------- Table ------------- " << endl;
+    cout << " ________________________________" << endl;
+
+    for (int row = 0; row < rows; row++){
+
+        for(int col = 0; col < cols; col ++){
+            cout << " | " << table[row][col] << "\t";
+
+            int currentElement = table[row][col];
+
+            if(max < currentElement){
+                max = currentElement;
+            }
+        }
+        cout << "| " << endl;
+    }
+
+    // print the max number
+    cout << endl << "Max number: " << max << endl;
+}
+
+// runs a loop that only stop when a 3 digit number
+// is entered by the user
+int getThreeDigitNumber(){
+    int input;
+    int running = true;
+
+    while(running){
+        cin >> input;
+
+        bool hasMoreThan2Digit = (input > 0 && input > 99) || (input < 0 && input < -99);
+        bool hasLessThan4Digit = (input > 0 && input < 1000) || (input < 0 && input > -1000); 
+
+        if (hasMoreThan2Digit && hasLessThan4Digit){
+            running = false;
+            return input;
+        } else {
+            cout << "use three digit number only!:  "; 
+        }
+    }
+
+    return 0;
 }
 
 // returns sum of 4 numbers
