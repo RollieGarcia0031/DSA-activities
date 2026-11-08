@@ -16,10 +16,12 @@ void activity_5(); // 8.
 void activity_6(); // 9.
 void activity_7(); // 10.
 void practical_3(); // 11.
-void exam_2();
+void exam_2(); // 12.
 
 // Final Term
 // -----------
+void activity_8(); // 13.
+void activity_9(); // 14.
 
 void printLiner();
 
@@ -64,7 +66,15 @@ int main(){
 
             cin >> itemOption;
             break;
+
         case 3:
+            cout << "\n\nInsert Number Option:" << endl
+                 << " 13. Activity 8"    << endl
+                 << " 14. Activity 9"    << endl
+                 << " (Input Number): " 
+            ;
+
+            cin >> itemOption;
             break;
         default:
             cout << "Invalid Input";
@@ -108,6 +118,12 @@ int main(){
             break;
         case 12:
             exam_2();
+            break;
+        case 13:
+            activity_8();
+            break;
+        case 14:
+            activity_9();
             break;
         default:
             cout << "Invalid Option";
@@ -1012,6 +1028,274 @@ void midtermExamSetA(){
     bubbleSort(table, rows*rows, true);
     cout << endl << "Sorted as Table: " << endl;
     print_1D_array_as_2D(table,rows, rows);
+}
+
+
+void insert(int [4][4], int, int, const int, const int, int, int&);
+void deleteElem(int[4][4], int, int, const int, const int, int &);
+void printTable(int [4][4], int, int);
+
+void activity_8(){
+    int option = 0,
+        rows = 4,
+        cols = 4,
+        size = 15;
+
+    // initialize table
+    int table[4][4] = {
+        {12, 2, 3, 4},
+        {1, 2, 3, 4},
+        {1, 43, 23, 63},
+        {52, 54, 23}
+    };
+
+    // insert user option
+    cout << "Choose an option: " << endl
+        << "  1. Insert" << endl
+        << "  2. Delete" << endl
+        << "  3. Copy" << endl
+        << "  Input: ";
+    cin >> option;
+
+    // show table before operation
+    cout << endl;
+    printTable(table, rows, cols);
+    int rowTarget, colTarget, value;
+
+    // perform needed operation
+    switch (option){
+        case(1):
+            cout << "\nWhich Row? ";
+            cin >> rowTarget;
+            cout << "Which Column? ";
+            cin >> colTarget;
+            cout << "Insert number value: ";
+            cin >> value;
+
+            insert(table, rowTarget, colTarget, rows, cols, value, size);
+            break;
+
+        case(2):
+            cout << "\nWhich Row? ";
+            cin >> rowTarget;
+            cout << "Which Column? ";
+            cin >> colTarget;
+
+            deleteElem(table, rowTarget, colTarget, rows, cols, size);
+            break;
+
+        case(3):
+            break;
+        default:
+            cout << "invalid option" << endl;
+    }
+   
+    cout << "\n________ Result:  _______\n";
+    printTable(table, rows, cols);
+}
+
+
+void printTable(int table[3][3]);
+void enqueue(int [3][3], int &, int, const int, const int);
+void dequeue(int table[3][3], int &size, const int cols);
+void push(int table[3][3], int &size, int value, const int rows, const int cols);
+void pop(int table[3][3], int &size, const int cols);
+
+void activity_9(){
+    // declare multidimensional array 
+    int table[3][3] = {
+        {243, 654, 742},
+        {631, 921, 123},
+        {412, 741}
+    };
+
+    int rows = 3,
+        cols = 3,
+        size = 8;
+
+    int option, inputNumber;
+
+    cout << "\nCurrent Table" << endl;
+    printTable(table);
+    cout << "\n";
+
+
+    while (true){
+
+        // take user input for option
+        cout << "Insert your option: " << endl
+             << " 1. Enqueue " << endl
+             << " 2. Dequeue " << endl
+             << " 3. Push " << endl
+             << " 4. Pop " << endl
+             << " 5. Exit Program " << endl
+             << "  Option: "
+        ;
+
+        cin >> option;
+
+        // ask for number input for option 1 & 3
+        if (option == 1 || option == 3){
+            cout << "\nInsert a 3 digit number: ";
+            inputNumber = getThreeDigitNumber();
+        }
+
+        // perform selected operation
+        switch (option) {
+            case 1:
+                enqueue(table, size, inputNumber, rows, cols);
+                break;
+            case 2:
+                dequeue(table, size, cols);
+                break;
+            case 3:
+                push(table, size, inputNumber, rows, cols);
+                break;
+            case 4:
+                pop(table, size, cols);
+                break;
+            case 5:
+                cout << "Exiting program" << endl;
+                return;
+            default:
+                cout << "invalid input!";
+        }
+
+        cout << "\n ------------------- Result Table -------------------\n";
+        printTable(table);
+        cout << "------------------- Result Table -------------------\n\n";
+    }
+}
+
+void enqueue(int table[3][3], int &size, int value, const int rows, const int cols){
+    // provide error message if list is full
+    if (size >= rows * cols){
+        cout << "Queue is full, cannot enqueue " << value << endl;
+        return;
+    }
+
+    // shift all elements to right
+    for (int i = size - 1; i >= 0; i--){
+        int nextRow = (i + 1) / cols;
+        int nextCol = (i + 1) % cols;
+        int currentRow = i / cols;
+        int currentCol = i % cols;
+
+        table[nextRow][nextCol] = table[currentRow][currentCol];
+    }
+
+    table[0][0] = value;
+    size++;
+}
+
+void pop(int table[3][3], int &size, const int cols) {
+    // give error message for empty list
+    if (size == 0){
+        cout << "Queue is empty, cannot dequeue" << endl;
+        return;
+    }
+
+    // shift all elements to the left
+    for (int i = 0; i < size - 1; i++){
+        int currentRow = i / cols;
+        int currencCol = i % cols;
+        int nextRow = (i + 1) / cols;
+        int nextCol = (i + 1) % cols;
+
+        table[currentRow][currencCol] = table[nextRow][nextCol];
+    }
+
+    size--;
+    table[size / cols][size % cols] = 0;
+}
+
+void push(int table[3][3], int &size, int value, const int rows, const int cols){
+    // provide error message for full list
+    if (size >= rows * cols){
+        cout << "Stack is full, cannot push " << value << endl;
+        return;
+    }
+
+    // shift all elements to the right
+    for (int i = size - 1; i >= 0; i--){
+        int nextRow = (i + 1) / cols;
+        int nextCol = (i + 1) % cols;
+        int currentValue = table[i / cols][i % cols];
+
+        table[nextRow][nextCol] = currentValue;
+    }
+
+    table[0][0] = value;
+    size++;
+}
+
+void dequeue(int table[3][3], int &size, const int cols){
+    if (size == 0){
+        cout << "Stack is empty, cannot pop" << endl;
+        return;
+    }
+
+    size--;
+    table[size / cols][size % cols] = 0;
+}
+
+void printTable(int table[3][3]){
+    for (int y = 0; y < 3; y ++){
+        for (int x = 0; x < 3; x ++){
+            cout << " " << table[y][x] << "\t";
+        }
+        cout << endl;
+    }
+}
+
+void insert(int table[4][4], int row, int col, const int MAX_ROWS, const int MAX_COLS, int value, int &size){
+    int position = col + (row * MAX_COLS);
+
+    if (size > MAX_ROWS * MAX_COLS){
+        cout << "Cannot insert, array has reached limit";
+    } else {
+        // shift elements to the right
+        for (int i = size - 1; i >= position; i --){
+            table[(i + 1)/MAX_COLS][(i + 1)%MAX_COLS] = table[i / MAX_COLS][i % MAX_COLS];
+        }
+
+        table[row][col] = value;
+        size ++;
+    }
+
+}
+
+void deleteElem(int table[4][4], int row, int col, const int MAX_ROWS, const int MAX_COLS, int &size){
+    int position = col + (row * MAX_COLS);
+
+    if (size == 0){
+        cout << "Cannot delete an empty array!" << endl;
+    } else if (position >= size){
+        cout << "Cannot delete empty cell" << endl;
+    } else {
+        // shift elements to the left
+        for (int i = position; i < size-1; i ++){
+            table[i / MAX_COLS][i % MAX_COLS] = table[(i+1) / MAX_COLS][(i+1) % MAX_COLS];
+        }
+
+        size --;
+        table[size / MAX_COLS][size % MAX_COLS] = 0;
+    }
+
+}
+
+void printTable(int table[4][4], int rows, int cols){
+    for (int y = 0; y < rows; y ++){
+        for (int x = 0; x < cols; x ++){
+            int num = table[y][x];
+            if (num == 0)
+                cout << "--";
+            else
+                cout << table[y][x];
+            cout << "\t";
+        }
+        cout << endl;
+    }
 }
 
 void bubbleSort(int arr[], int size, bool ascending){
