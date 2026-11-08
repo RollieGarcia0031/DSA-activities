@@ -16,6 +16,7 @@ void activity_5(); // 8.
 void activity_6(); // 9.
 void activity_7(); // 10.
 void practical_3(); // 11.
+void exam_2();
 
 // Final Term
 // -----------
@@ -57,6 +58,7 @@ int main(){
                  << " 9. Activity 6"    << endl
                  << " 10. Activity 7"    << endl
                  << " 11. Practical 3"    << endl
+                 << " 12. Exam 2"    << endl
                  << " (Input Number): " 
             ;
 
@@ -103,6 +105,9 @@ int main(){
             break;
         case 11:
             practical_3();
+            break;
+        case 12:
+            exam_2();
             break;
         default:
             cout << "Invalid Option";
@@ -943,6 +948,102 @@ int setB(){
     cout << "Found at index: [" << min_row_index << "]" << "[" << min_col_index << "]" << endl;
     cout << "Equivalent alphabet character: " << getCharEquivalent(smallestNumber) << endl;
     return 0;
+}
+
+void bubbleSort(int[], int, bool);
+int getThreeDigitNumber();
+void print_1D_array_as_2D(int table[100], int rows, int cols);
+
+void midtermExamSetA();
+void midtermExamSetB();
+
+void exam_2(){
+    int option;
+    cout << "Switch problem set: (1,2): " << endl;
+    cin >> option;
+
+    switch (option){
+        case 1:
+            midtermExamSetA();
+            break;
+        case 2:
+            midtermExamSetB();
+            break;
+        default:
+            cout << "invalid option" << endl;
+    }
+}
+
+void midtermExamSetB(){
+    int rows, cols;
+    int table[100];
+
+    cout << "Insert rows: ";
+    cin >> rows;
+    cout << "Insert cols: ";
+    cin >> cols;
+
+
+    for (int i = 0; i < rows * cols; i ++){
+        cout << "Insert a 3-digit number";
+        int input = getThreeDigitNumber();
+        table[i] = input;
+    }
+
+    bubbleSort(table, rows*cols, false);
+    
+    cout << endl << "Table in descending order: " << endl;
+    print_1D_array_as_2D(table, rows,  cols);
+}
+
+void midtermExamSetA(){
+    int rows;
+    int table[100];
+
+    cout << "Insert number of rows: ";
+    cin >> rows;
+
+    for (int i = 0; i < rows*rows; i ++){
+        cout << "Insert a 3 digit integer: ";
+        int input = getThreeDigitNumber();
+        table[i] = input;
+    }
+
+    bubbleSort(table, rows*rows, true);
+    cout << endl << "Sorted as Table: " << endl;
+    print_1D_array_as_2D(table,rows, rows);
+}
+
+void bubbleSort(int arr[], int size, bool ascending){
+    
+    // iterate by using a moving starting index
+    for (int startingIndex = 0; startingIndex < size-1; startingIndex ++){
+        // start the index from zero, then ignore the last element (as it is assumed
+        // to be already the greatest one)
+        for (int currentIndex = 0; currentIndex < (size - 1 - startingIndex); currentIndex++){
+            int currentElem = arr[currentIndex];
+            int nextElement = arr[currentIndex + 1];
+
+            // check if next element is smaller than current element
+            if((ascending && currentElem > nextElement) || (!ascending && currentElem < nextElement) ){
+                // swap the current element to next element
+                int temp = arr[currentIndex];
+                arr[currentIndex] = arr[currentIndex+1];
+                arr[currentIndex+1] = temp;
+            }
+            
+        }
+    }
+}
+
+void print_1D_array_as_2D(int table[100], int rows, int cols){
+    for (int y = 0; y < rows; y ++){
+        for (int x = 0; x < cols; x ++){
+            int num = table[x + (cols * y)];
+            cout << num << "\t";
+        }
+        cout << endl;
+    }
 }
 
 void print2DIntArray(int table[50][50], int rows, int cols){
