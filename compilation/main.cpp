@@ -263,6 +263,28 @@ void activity_4(){
     cout << "Area: " << ellipseArea << endl;
 }
 
+void assignPi(double *pi, const double value ){
+    *pi = value;
+}
+
+// calculate the area and circumference of circle
+void evaluate_circle(double radius, double pi, double &circumference, double &area){
+    area = pi * radius * radius;
+    circumference = 2 * pi * radius;
+}
+
+// calculate the circumference and area of ellipse
+void evaluate_ellipse(double radius, double pi, double &circumference, double &area){
+    double A = radius;
+    double B = radius * 2;
+
+    area = pi * A * B;
+
+    // use approximation formula
+    double eccentricFactor = (A - B) / (A + B);
+    circumference = pi * (A + B) * (1 + (eccentricFactor * eccentricFactor) / 4);
+}
+
 void practical_1(){
 
     int set_int;
@@ -285,7 +307,7 @@ void practical_1(){
 
             // check different month cases
             switch (month) {
-                case 2:
+                case 2: // feb
                     if ((year % 400 != 0) && (year % 4 == 0 && year % 400 != 0) ) {
                     cout << "this month has 29 days" << endl;
                     } else {
@@ -293,20 +315,20 @@ void practical_1(){
                     }
                 break;
 
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
+                case 1:// jan
+                case 3:// mar
+                case 5:// may
+                case 7:// jul
+                case 8: // aug 
+                case 10:// oct
+                case 12: // dec
                     cout << "this month has 31 days " << endl;
                 break;
 
-                case 4:
-                case 6:
-                case 9:
-                case 11:
+                case 4: // apr
+                case 6: // jun
+                case 9: // sep
+                case 11: // nov
                     cout << "this has 30 days" << endl;
                 break;
 
@@ -1507,28 +1529,6 @@ double getProduct(double num1, double num2, double ref1, double ref2){
     return num1 * num2 * ref1 * ref2;
 }
 // assign the desired value of PI
-void assignPi(double *pi, const double value ){
-    *pi = value;
-}
-
-// calculate the area and circumference of circle
-void evaluate_circle(double radius, double pi, double &circumference, double &area){
-    area = pi * radius * radius;
-    circumference = 2 * pi * radius;
-}
-
-// calculate the circumference and area of ellipse
-void evaluate_ellipse(double radius, double pi, double &circumference, double &area){
-    double A = radius;
-    double B = radius * 2;
-
-    area = pi * A * B;
-
-    // use approximation formula
-    double eccentricFactor = (A - B) / (A + B);
-    circumference = pi * (A + B) * (1 + (eccentricFactor * eccentricFactor) / 4);
-}
-
 void printLiner(){
     cout << "\n------------------------------\n";
 }
