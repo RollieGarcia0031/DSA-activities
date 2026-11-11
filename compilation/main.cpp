@@ -31,111 +31,114 @@ int main(){
     int termOption = 0,
         itemOption = 0;
 
-    cout << "Which term would you pick?" << endl
-         << " 1. Prelim" << endl
-         << " 2. Midterm" << endl
-         << " 3. Finals" << endl
-         << " (Input Number Here): ";
-    cin >> termOption;
+    while (true) {
+        cout << "Which term would you pick?" << endl
+             << " 1. Prelim" << endl
+             << " 2. Midterm" << endl
+             << " 3. Finals" << endl
+             << " (Input Number Here): ";
+        cin >> termOption;
 
-    printLiner();
+        printLiner();
 
-    switch (termOption){
-        case 1:
+        switch (termOption){
+            case 1:
 
-            cout << "\n\nInsert Number Option:" << endl
-                 << " 1. Activity 1"    << endl
-                 << " 2. Activity 2"    << endl
-                 << " 3. Activity 3"    << endl
-                 << " 4. Activity 4"    << endl
-                 << " 5. Practical Test 1" << endl
-                 << " 6. Practical Test 2" << endl
-                 << " 7. Exam 1" << endl
-                 << " (Input Number): " 
-            ;
-            cin >> itemOption;
+                cout << "\n\nInsert Number Option:" << endl
+                     << " 1. Activity 1"    << endl
+                     << " 2. Activity 2"    << endl
+                     << " 3. Activity 3"    << endl
+                     << " 4. Activity 4"    << endl
+                     << " 5. Practical Test 1" << endl
+                     << " 6. Practical Test 2" << endl
+                     << " 7. Exam 1" << endl
+                     << " (Input Number): " 
+                ;
+                cin >> itemOption;
 
-            break;
-        case 2:
-            cout << "\n\nInsert Number Option:" << endl
-                 << " 8. Activity 5"    << endl
-                 << " 9. Activity 6"    << endl
-                 << " 10. Activity 7"    << endl
-                 << " 11. Practical 3"    << endl
-                 << " 12. Exam 2"    << endl
-                 << " (Input Number): " 
-            ;
+                break;
+            case 2:
+                cout << "\n\nInsert Number Option:" << endl
+                     << " 8. Activity 5"    << endl
+                     << " 9. Activity 6"    << endl
+                     << " 10. Activity 7"    << endl
+                     << " 11. Practical 3"    << endl
+                     << " 12. Exam 2"    << endl
+                     << " (Input Number): " 
+                ;
 
-            cin >> itemOption;
-            break;
+                cin >> itemOption;
+                break;
 
-        case 3:
-            cout << "\n\nInsert Number Option:" << endl
-                 << " 13. Activity 8"    << endl
-                 << " 14. Activity 9"    << endl
-                 << " 15. Activity 10"    << endl
-                 << " (Input Number): " 
-            ;
+            case 3:
+                cout << "\n\nInsert Number Option:" << endl
+                     << " 13. Activity 8"    << endl
+                     << " 14. Activity 9"    << endl
+                     << " 15. Activity 10"    << endl
+                     << " (Input Number): " 
+                ;
 
-            cin >> itemOption;
-            break;
-        default:
-            cout << "Invalid Input";
+                cin >> itemOption;
+                break;
+            default:
+                cout << "\n\n-----------------------Invalid Input-----------------------\n\n";;
+                continue;
+        }
+
+        printLiner();
+
+        switch (itemOption){
+            case 1 :
+                activity_1();
+                break;
+            case 2 :
+                activity_2();
+                break;
+            case 3 :
+                activity_3();
+                break;
+            case 4 :
+                activity_4();
+                break;
+            case 5:
+                practical_1();
+                break;
+            case 6:
+                practical_2();
+                break;
+            case 7:
+                exam_1();
+                break;
+            case 8:
+                activity_5();
+                break;
+            case 9:
+                activity_6();
+                break;
+            case 10:
+                activity_7();
+                break;
+            case 11:
+                practical_3();
+                break;
+            case 12:
+                exam_2();
+                break;
+            case 13:
+                activity_8();
+                break;
+            case 14:
+                activity_9();
+                break;
+            case 15:
+                activity_10();
+                break;
+            default:
+                cout << "Invalid Option";
+        }
+
+        printLiner();
     }
-
-    printLiner();
-
-    switch (itemOption){
-        case 1 :
-            activity_1();
-            break;
-        case 2 :
-            activity_2();
-            break;
-        case 3 :
-            activity_3();
-            break;
-        case 4 :
-            activity_4();
-            break;
-        case 5:
-            practical_1();
-            break;
-        case 6:
-            practical_2();
-            break;
-        case 7:
-            exam_1();
-            break;
-        case 8:
-            activity_5();
-            break;
-        case 9:
-            activity_6();
-            break;
-        case 10:
-            activity_7();
-            break;
-        case 11:
-            practical_3();
-            break;
-        case 12:
-            exam_2();
-            break;
-        case 13:
-            activity_8();
-            break;
-        case 14:
-            activity_9();
-            break;
-        case 15:
-            activity_10();
-            break;
-        default:
-            cout << "Invalid Option";
-    }
-
-    printLiner();
     return 0;
 }
 
