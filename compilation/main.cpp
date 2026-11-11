@@ -34,6 +34,10 @@ int main(){
     int termOption = 0,
         itemOption = 0;
 
+    cout << "\n\n"
+         << "==========================================\n"
+         << "             DSA FINAL PROJECT       \n"
+         << "==========================================\n";
     while (true) {
         cout << "Which term would you pick?" << endl
              << " 1. Prelim" << endl

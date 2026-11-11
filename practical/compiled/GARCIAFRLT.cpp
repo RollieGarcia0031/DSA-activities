@@ -28,46 +28,46 @@ int main(){
 
 // stack
 void finalPracSetA(){
-    int s1[] = {0, 0, 25, 50, 75, 100},
-        s2[] = {0, 0, 0, 0, 0, 0},
-        size1 = 4, size2 = 0, inputNum, max = 6;
+    int stack1[] = {0, 0, 25, 50, 75, 100},
+        stack2[] = {0, 0, 0, 0, 0, 0},
+        top1 = 4, top2 = 0, pushValue, maxSize = 6, stackBottom = maxSize - 1;
 
     while (true) {
         cout << "Insert Number: ";
-        cin >> inputNum;
+        cin >> pushValue;
 
-        if (size1 < max) {
-            s1[max - size1 - 1] = inputNum;
-            size1 ++;
+        if (top1 < maxSize) {
+            stack1[stackBottom - top1] = pushValue;
+            top1 ++;
         }
 
-        if (size1 == max) {
+        if (top1 == maxSize) {
             cout << "\n\n-----Stack 1 is full, moving to backup stack...\n";
 
-            while (size1 > 0 && size2 <= max) {
-                int pop = s1[size1-1];
-                cout << "pop: " << pop << endl;
-                size1 --;
-                s1[size1] = 0;
+            while (top1 > 0 && top2 <= maxSize) {
+                int popValue = stack1[top1-1];
+                cout << "pop: " << popValue << endl;
+                top1 --;
+                stack1[top1] = 0;
 
-                s2[max - size2 - 1] = pop;
-                size2 ++;
+                stack2[stackBottom - top2] = popValue;
+                top2 ++;
 
                 cout << "---------------------------\nMain List:";
-                printList(s1, max);
+                printList(stack1, maxSize);
 
                 cout << "\nBackup List: ";
-                printList(s2, max);
+                printList(stack2, maxSize);
                 cout << "\n---------------------------\n";
             }
 
         }
 
         cout << "---------------------------\nMain List:";
-        printList(s1, max);
+        printList(stack1, maxSize);
 
         cout << "\nBackup List: ";
-        printList(s2, max);
+        printList(stack2, maxSize);
         cout << "\n---------------------------\n";
     }
 
@@ -75,52 +75,52 @@ void finalPracSetA(){
 
 // queue
 void finalPracSetB(){
-    int q1[5] = {0, 0, 0, 0, 0},
-        q2[5] = {0, 0, 0, 0, 0},
-        inputNum, size1 = 0, size2 = 0;
+    int queue1[5] = {0, 0, 0, 0, 0},
+        queue2[5] = {0, 0, 0, 0, 0},
+        enqueueValue, q1_front = 0, q1_rear = 0, q2_front = 0, q2_rear = 0;
 
     while (true){
         cout << "Insert a Number: ";
-        cin >> inputNum;
+        cin >> enqueueValue;
 
-        if (size1 < 5){
+        if (q1_rear < 5){
             // push elements to the right to free index 0
-            for (int i = 4; i > 0; i --){
-                q1[i] = q1[i-1];
+            for (int i = 4; i > q1_front; i --){
+                queue1[i] = queue1[i-1];
             }
 
             // place the input element at the front
-            q1[0] = inputNum;
-            size1 ++;
+            queue1[q1_front] = enqueueValue;
+            q1_rear ++;
         }
 
         cout << "---------------------------\nMain List:";
-        printList(q1, 5);
+        printList(queue1, 5);
 
         cout << "\nBackup List: ";
-        printList(q2, 5);
+        printList(queue2, 5);
         cout << "\n---------------------------\n";
 
-        if (size1 >= 5) {
+        if (q1_rear >= 5) {
             cout << "Main queue is full, moving to backup queue now...\n";
 
-            while (size1 > 0) {
-                int dequeue1 = q1[size1 - 1];
-                q1[size1-1] = 0;
-                size1 --;
+            while (q1_rear > q1_front) {
+                int dequeueValue = queue1[q1_rear - 1];
+                queue1[q1_rear-1] = 0;
+                q1_rear --;
 
-                for (int i = size2; i > 0; i --) {
-                    q2[i] = q2[i-1];
+                for (int i = q2_rear; i > q2_front; i --) {
+                    queue2[i] = queue2[i-1];
                 }
 
-                q2[0] = dequeue1;
-                size2 ++;
+                queue2[q2_front] = dequeueValue;
+                q2_rear ++;
 
                 cout << "---------------------------\nMain List:";
-                printList(q1, 5);
+                printList(queue1, 5);
 
                 cout << "\nBackup List: ";
-                printList(q2, 5);
+                printList(queue2, 5);
                 cout << "\n---------------------------\n";
 
             }
