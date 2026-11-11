@@ -24,6 +24,8 @@ void activity_8(); // 13.
 void activity_9(); // 14.
 void activity_10(); // 15.
 
+// wrapper
+void prelim(int actNum);
 // helper
 void printLiner();
 
@@ -56,18 +58,29 @@ int main(){
                 ;
                 cin >> itemOption;
 
+                if (itemOption <= 7 && itemOption > 0){
+                    prelim(itemOption);
+                } else {
+                    continue;
+                }
                 break;
             case 2:
                 cout << "\n\nInsert Number Option:" << endl
-                     << " 8. Activity 5"    << endl
-                     << " 9. Activity 6"    << endl
-                     << " 10. Activity 7"    << endl
-                     << " 11. Practical 3"    << endl
-                     << " 12. Exam 2"    << endl
+                     << " 1. Activity 5"    << endl
+                     << " 2. Activity 6"    << endl
+                     << " 3. Activity 7"    << endl
+                     << " 4. Practical 3"    << endl
+                     << " 5. Exam 2"    << endl
                      << " (Input Number): " 
                 ;
 
                 cin >> itemOption;
+
+                if (itemOption > 0 && itemOption <= 5){
+                    
+                } else {
+                    continue;
+                }
                 break;
 
             case 3:
@@ -142,6 +155,30 @@ int main(){
     return 0;
 }
 
+void prelim(int actNum){
+    switch (actNum){
+        case 1:
+            activity_1();
+            break;
+        case 2:
+            activity_2();
+            break;
+        case 3:
+            activity_3();
+            break;
+        case 4:
+            activity_4();
+            break;
+        case 5:
+            practical_1();
+            break;
+        case 6:
+            practical_2();
+            break;
+        case 7:
+            exam_1();
+    }
+}
 /**
  * Basics of cout and cin
  */
