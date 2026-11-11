@@ -26,9 +26,10 @@ void activity_10(); // 15.
 
 // wrapper
 void prelim(int actNum);
+void midterm(int actNum);
+
 // helper
 void printLiner();
-
 int main(){
     int termOption = 0,
         itemOption = 0;
@@ -77,7 +78,7 @@ int main(){
                 cin >> itemOption;
 
                 if (itemOption > 0 && itemOption <= 5){
-                    
+
                 } else {
                     continue;
                 }
@@ -155,28 +156,48 @@ int main(){
     return 0;
 }
 
-void prelim(int actNum){
-    switch (actNum){
+void midterm(int actNum){
+
+    switch (actNum) {
         case 1:
-            activity_1();
+            activity_5();
             break;
         case 2:
-            activity_2();
+            activity_6();
             break;
         case 3:
-            activity_3();
+            activity_7();
             break;
         case 4:
-            activity_4();
+            practical_3();
             break;
         case 5:
-            practical_1();
+            exam_2();
             break;
-        case 6:
-            practical_2();
-            break;
-        case 7:
-            exam_1();
+    }
+}
+void prelim(int actNum){
+switch (actNum){
+    case 1:
+        activity_1();
+        break;
+    case 2:
+        activity_2();
+        break;
+    case 3:
+        activity_3();
+        break;
+    case 4:
+        activity_4();
+        break;
+    case 5:
+        practical_1();
+        break;
+    case 6:
+        practical_2();
+        break;
+    case 7:
+        exam_1();
     }
 }
 /**
