@@ -37,7 +37,13 @@ void finalPracSetA(){
         cin >> pushValue;
 
         if (top1 < maxSize) {
-            stack1[stackBottom - top1] = pushValue;
+            // push every element to the left
+            for (int i = 0; i < stackBottom; i ++) {
+                stack1[i] = stack1[i+1];
+            }
+
+            // the new element goes to the right
+            stack1[stackBottom] = pushValue;
             top1 ++;
         }
 
