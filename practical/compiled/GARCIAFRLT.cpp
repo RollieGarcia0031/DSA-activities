@@ -51,13 +51,21 @@ void finalPracSetA(){
             cout << "\n\n-----Stack 1 is full, moving to backup stack...\n";
 
             while (top1 > 0 && top2 <= maxSize) {
-                int popValue = stack1[top1-1];
-                cout << "pop: " << popValue << endl;
                 top1 --;
-                stack1[top1] = 0;
+                int popValue = stack1[stackBottom];
+                cout << "pop: " << popValue << endl;
 
-                stack2[stackBottom - top2] = popValue;
-                top2 ++;
+                for (int i = maxSize-1; i > 0; i --) {
+                    stack1[i] = stack1[i-1];
+                }
+
+                stack1[0] = 0;
+
+                for (int i = 0; i < stackBottom; i ++) {
+                    stack2[i] = stack2[i+1]; 
+                }
+
+                stack2[stackBottom] = popValue;
 
                 cout << "---------------------------\nMain List:";
                 printList(stack1, maxSize);
