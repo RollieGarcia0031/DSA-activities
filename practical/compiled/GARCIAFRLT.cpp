@@ -74,7 +74,6 @@ void finalPracSetA(){
                 printList(stack2, maxSize);
                 cout << "\n---------------------------\n";
             }
-
         }
 
         cout << "---------------------------\nMain List:";

@@ -23,10 +23,12 @@ void exam_2(); // 12.
 void activity_8(); // 13.
 void activity_9(); // 14.
 void activity_10(); // 15.
+void practical_4(); // 16.
 
 // wrapper
 void prelim(int actNum);
 void midterm(int actNum);
+void finals(int actNum);
 
 // helper
 void printLiner();
@@ -52,10 +54,10 @@ int main(){
             case 1:
 
                 cout << "\n\nInsert Number Option:" << endl
-                     << " 1. Activity 1"    << endl
-                     << " 2. Activity 2"    << endl
-                     << " 3. Activity 3"    << endl
-                     << " 4. Activity 4"    << endl
+                     << " 1. Activity 1 - C++ Basics (Iostream)"    << endl
+                     << " 2. Activity 2 - Strings"    << endl
+                     << " 3. Activity 3 - Square Pattern"    << endl
+                     << " 4. Activity 4 - Circle & Ellipse"    << endl
                      << " 5. Practical Test 1" << endl
                      << " 6. Practical Test 2" << endl
                      << " 7. Exam 1" << endl
@@ -71,9 +73,9 @@ int main(){
                 break;
             case 2:
                 cout << "\n\nInsert Number Option:" << endl
-                     << " 1. Activity 5"    << endl
-                     << " 2. Activity 6"    << endl
-                     << " 3. Activity 7"    << endl
+                     << " 1. Activity 5: 2D array Max-Finder"    << endl
+                     << " 2. Activity 6: 2D array Search"    << endl
+                     << " 3. Activity 7: 1D Sorting Algorithms"    << endl
                      << " 4. Practical 3"    << endl
                      << " 5. Exam 2"    << endl
                      << " (Input Number): " 
@@ -82,21 +84,28 @@ int main(){
                 cin >> itemOption;
 
                 if (itemOption > 0 && itemOption <= 5){
-
+                    midterm(itemOption);
                 } else {
                     continue;
                 }
+
                 break;
 
             case 3:
                 cout << "\n\nInsert Number Option:" << endl
-                     << " 13. Activity 8"    << endl
-                     << " 14. Activity 9"    << endl
-                     << " 15. Activity 10"    << endl
+                     << " 1. Activity 8 - List Operation"    << endl
+                     << " 2. Activity 9 - Stack and Queue Operations" << endl
+                     << " 3. Activity 10 - Vending Machine"    << endl
+                     << " 4. Practical 4"    << endl
                      << " (Input Number): " 
                 ;
 
                 cin >> itemOption;
+                if (itemOption > 0 && itemOption <=4) {
+                    finals(itemOption);
+                } else {
+                    continue;
+                }
                 break;
             default:
                 cout << "\n\n-----------------------Invalid Input-----------------------\n\n";;
@@ -104,60 +113,25 @@ int main(){
         }
 
         printLiner();
-
-        switch (itemOption){
-            case 1 :
-                activity_1();
-                break;
-            case 2 :
-                activity_2();
-                break;
-            case 3 :
-                activity_3();
-                break;
-            case 4 :
-                activity_4();
-                break;
-            case 5:
-                practical_1();
-                break;
-            case 6:
-                practical_2();
-                break;
-            case 7:
-                exam_1();
-                break;
-            case 8:
-                activity_5();
-                break;
-            case 9:
-                activity_6();
-                break;
-            case 10:
-                activity_7();
-                break;
-            case 11:
-                practical_3();
-                break;
-            case 12:
-                exam_2();
-                break;
-            case 13:
-                activity_8();
-                break;
-            case 14:
-                activity_9();
-                break;
-            case 15:
-                activity_10();
-                break;
-            default:
-                cout << "Invalid Option";
-        }
-
-        printLiner();
     }
     return 0;
+}
+
+void finals(int actNum){
+    switch (actNum) {
+        case 1:
+            activity_8();
+            break;
+        case 2:
+            activity_9();
+            break;
+        case 3:
+            activity_10();
+            break;
+        case 4:
+            practical_4();
+            break;
+    }
 }
 
 void midterm(int actNum){
@@ -360,7 +334,10 @@ void practical_1(){
 
     int set_int;
 
-    cout << "Choose set (1-3): ";
+    cout << "\n Problem Sets:\n1. Month day checker" << endl
+         << "2. Hour Glass" << endl
+         << "3. Seconds to Days Parser" << endl
+         << "Choose set (1-3): ";
     cin >> set_int;
 
     switch(set_int){
@@ -460,6 +437,7 @@ void practical_1(){
             cout << "Enter the amount of seconds: ";
             cin >> seconds_input;
             int additional_input = seconds_input + additional_seconds;
+            cout << endl;
 
             // use loop to print original and added time
             for (int i = 1; i <= 2; i ++){
@@ -492,9 +470,11 @@ void practical_2(){
 
     // choose option 1 or 2
     int option;
-    cout << "Choose option (1,2): " << endl
-         << " 1. Set A" << endl
-         << " 2. Set B" << endl
+    cout
+         << endl
+         << " 1. Address - Pointer: Table" << endl
+         << " 2. Address - Pointer: Mean, Product, Sum" << endl
+         << "Choose option (1,2): "
     ;
 
     cin >> option;
@@ -582,19 +562,18 @@ void exam_1 (){
 
     int option;
 
-    cout << "Enter option: " << endl 
-         << " 1. Set A" << endl
-         << " 2. Set B" << endl
-         << " 3. Set C" << endl
-         << " 4. Set D" << endl
-         << " Input Number (1-4): " 
+    cout
+         << " 1. Binary To Decimal Converter" << endl
+         << " 2. Empty Southern Region @" << endl
+         << " 3. Empty 4th Quadrant" << endl
+         << " 4. Rectangle Fibonacci" << endl
+         << "   Enter option: " 
          ;
     cin >> option;
 
     switch (option) {
         // SET A
         case 1:                                                                                                                                                 {
-
             int binary, decimal;
 
             cout << "Enter a binary number: ";
@@ -925,7 +904,10 @@ void practical_3(){
     // take user input for problem set
 
     int input_option;
-    cout << "Insert option for problem set: (1,2) ";
+    cout
+        << "1. Alphabet Mirror" << endl
+        << "2. Smallest Alphabet Finder" << endl
+        << "Insert option for problem set: (1,2) ";
     cin >> input_option;
 
     cout << endl << endl;
@@ -1068,7 +1050,11 @@ void midtermExamSetB();
 
 void exam_2(){
     int option;
-    cout << "Switch problem set: (1,2): " << endl;
+    cout
+        << "1. 2D Table Sorter (Ascending)" << endl
+        << "2. 2D Table Sorter (Descending)" << endl
+        << "Switch problem set: (1,2): "
+        ;
     cin >> option;
 
     switch (option){
@@ -1094,7 +1080,7 @@ void midtermExamSetB(){
 
 
     for (int i = 0; i < rows * cols; i ++){
-        cout << "Insert a 3-digit number";
+        cout << "Insert a 3-digit number: ";
         int input = getThreeDigitNumber();
         table[i] = input;
     }
@@ -1343,8 +1329,159 @@ void activity_10(){
         if (userInput == 'n')
             return;
     }
+}
 
-    return;
+void printList(int list[5], int size);
+void finalPracSetA();
+void finalPracSetB();
+void practical_4(){
+
+    int option, numberInput;
+
+    cout
+         << "1. Multi-Stack Operations" << endl
+         << "2. Multi-Queue Operations" << endl
+         << "3. Exit" << endl
+         << "Insert option: ";
+    cin >> option;
+
+    switch (option){
+        case 1:
+            finalPracSetA();
+            break;
+        case 2:
+            finalPracSetB();
+            break;
+        case 3:
+            return;
+    }
+}
+
+// stack
+void finalPracSetA(){
+    int stack1[] = {0, 0, 25, 50, 75, 100},
+        stack2[] = {0, 0, 0, 0, 0, 0},
+        top1 = 4, top2 = 0, pushValue, maxSize = 6, stackBottom = maxSize - 1;
+
+    while (true) {
+        cout << "Insert Number: ";
+        cin >> pushValue;
+
+        if (top1 < maxSize) {
+            // push every element to the left
+            for (int i = 0; i < stackBottom; i ++) {
+                stack1[i] = stack1[i+1];
+            }
+
+            // the new element goes to the right
+            stack1[stackBottom] = pushValue;
+            top1 ++;
+        }
+
+        if (top1 == maxSize) {
+            cout << "\n\n-----Stack 1 is full, moving to backup stack...\n";
+
+            while (top1 > 0 && top2 <= maxSize) {
+                top1 --;
+                int popValue = stack1[stackBottom];
+                cout << "pop: " << popValue << endl;
+
+                for (int i = maxSize-1; i > 0; i --) {
+                    stack1[i] = stack1[i-1];
+                }
+
+                stack1[0] = 0;
+
+                for (int i = 0; i < stackBottom; i ++) {
+                    stack2[i] = stack2[i+1]; 
+                }
+
+                stack2[stackBottom] = popValue;
+
+                cout << "---------------------------\nMain List:";
+                printList(stack1, maxSize);
+
+                cout << "\nBackup List: ";
+                printList(stack2, maxSize);
+                cout << "\n---------------------------\n";
+            }
+
+            break;
+        }
+
+        cout << "---------------------------\nMain List:";
+        printList(stack1, maxSize);
+
+        cout << "\nBackup List: ";
+        printList(stack2, maxSize);
+        cout << "\n---------------------------\n";
+    }
+
+}
+
+// queue
+void finalPracSetB(){
+    int queue1[5] = {0, 0, 0, 0, 0},
+        queue2[5] = {0, 0, 0, 0, 0},
+        enqueueValue, q1_front = 0, q1_rear = 0, q2_front = 0, q2_rear = 0;
+
+    while (true){
+        cout << "Insert a Number: ";
+        cin >> enqueueValue;
+
+        if (q1_rear < 5){
+            // push elements to the right to free index 0
+            for (int i = 4; i > q1_front; i --){
+                queue1[i] = queue1[i-1];
+            }
+
+            // place the input element at the front
+            queue1[q1_front] = enqueueValue;
+            q1_rear ++;
+        }
+
+        cout << "---------------------------\nMain List:";
+        printList(queue1, 5);
+
+        cout << "\nBackup List: ";
+        printList(queue2, 5);
+        cout << "\n---------------------------\n";
+
+        if (q1_rear >= 5) {
+            cout << "Main queue is full, moving to backup queue now...\n";
+
+            while (q1_rear > q1_front) {
+                int dequeueValue = queue1[q1_rear - 1];
+                queue1[q1_rear-1] = 0;
+                q1_rear --;
+
+                for (int i = q2_rear; i > q2_front; i --) {
+                    queue2[i] = queue2[i-1];
+                }
+
+                queue2[q2_front] = dequeueValue;
+                q2_rear ++;
+
+                cout << "---------------------------\nMain List:";
+                printList(queue1, 5);
+
+                cout << "\nBackup List: ";
+                printList(queue2, 5);
+                cout << "\n---------------------------\n";
+
+            }
+
+            break;
+        }
+    }
+}
+
+void printList(int list[5], int size){
+    cout << "[ ";
+    for (int i = 0; i < size; i ++){
+        cout << list[i] << "\t";
+    }
+    cout << "]";
 }
 
 bool isValidCurrency(float bill){
